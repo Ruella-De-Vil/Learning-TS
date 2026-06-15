@@ -1,2 +1,0 @@
-# Learning TS
-Typescript Notes
