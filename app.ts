@@ -1,5 +1,5 @@
 /* Basic TypeScript types */
-/* 1. Primitive types - most basic types in TypeScript: numbers, strings, booleans, null (used when you want to explicitly define something as empty or non-existent), undefined (used more as a placeholder that means a variable has been declared but has not yet been assigned a value (in other words not initialized), void and never) -- stick to lowercase when declaring */
+// 1. Primitive types - most basic types in TypeScript: numbers, bigint (a numeric data type in JavaScript to represent numbers larger than the standard integer type.), strings, booleans, null (used when you want to explicitly define something as empty or non-existent), undefined (used more as a placeholder that means a variable has been declared but has not yet been assigned a value (in other words not initialized), void and never) -- stick to lowercase when declaring 
 
 let a = 1; //inferred as number - implicit typing, because 1 is a number ts deternmines 1 is a number and sets a to be of type number;
 
@@ -44,3 +44,59 @@ const coord2: [number, string] = [1, "a"]; // explicit typing, we explicitly tel
 const coord3: [number, number, string] = [1, 2, "a"]; // explicit typing, we explicitly tell ts that coord3 is a tuple of two numbers and a string
 
 const coord4: [number, number][] = [[1, 2], [3, 4]]; // explicit typing, we explicitly tell ts that coord4 is an array of tuples of two numbers
+
+//
+
+/* Literals and Emums */
+
+// Literals - a specific value that a variable can hold, we can use literal types to restrict a variable to hold only a specific value or set of values. Can be used when needing to be exact. Literal(s) can be used as a type.
+
+let literal1: "hello" | "hi" | "hey"; // explicit typing, we explicitly tell ts that literal1 can only be one of the three string values. can be one value or multiple ( by using a union type).
+
+let literal2: true; // explicit typing, we explicitly tell ts that literal2 can only be the boolean value true
+
+//Enums - enables devs to establish a collection of named constants (enumerators), each linked with an integer value. We can have numeric enums and string enums. Instead of hardcoding strings or numbers, we can make our code a little easier to read and understand by encoding different values with variable names.
+
+//This is a numeric enum:
+enum Size {      // First letter is capitalised
+  Small, // returns 0
+  Medium, // returns 1
+  Large, // returns 2
+}                    //basic enum syntax.  These values are auto-incremented starting from 0. We can also assign specific values to the enum members, for example: 
+/* 
+enum Size {      
+Small = 1,
+Medium = 3,
+Large = 5
+}
+ */
+
+//accessing enum values:
+Size.Small; // returns 0
+
+//Reason for using this instead of a string literal type ("Small" | "Medium" | "Large") is that it is easier to read and understand, and it also provides a way to group related values together. It also provides a way to easily access the values of the enum, and it can be used in switch statements and other control flow structures. Enums can also be used to create a set of related constants that can be used throughout your codebase, which can help to improve code readability and maintainability.
+// A string literal type has strings not put into context, whereas an enum has the strings put into context by grouping them together under a common name (Size in this case).
+
+var size: Size = Size.Medium; // we can assign the enum value to a variable of type Size, this can also be written as 'var size: Size = 1'; but it is better to use the enum value for readability and maintainability.
+
+//String enum:
+enum Direction {
+    Up = "UP",  // Up variable is assocciated with the string value "UP" ... note that the string value is in uppercase, this is a common convention for enum values, but it is not required. The variable name can be in any case, but the string value is usually in uppercase. They can even be the same.
+    Down = "DOWN",
+    Left = "LEFT",
+    Right = "RIGHT"
+}
+
+//Enums are treated as datatypes, and can be used to create sets of constants for use with variables and properties.
+
+var value: Direction; //only one of the four string values can be assigned to value, and it has to be of type Direction
+
+value = Direction.Up; // we can assign the enum value to a variable of type Direction, this can also be written as 'value: Direction = "UP";' but it is better to use the enum value for readability and maintainability.
+
+//
+
+/* Any, Unknown and type casts */
+
+// 'Any' type allows for flexible typing but sacrifices type safety as it lacks complile-time type checking
+
+
